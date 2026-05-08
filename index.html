@@ -472,10 +472,42 @@
             100% { transform: translateY(-12vh) rotate(360deg); opacity: 0; }
         }
 
+        /* Music button */
+        #musicBtn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            background: rgba(42, 8, 69, 0.85);
+            border: 1.5px solid rgba(255, 215, 0, 0.5);
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            font-size: 22px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.3), 0 4px 16px rgba(0,0,0,0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        #musicBtn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 28px rgba(255, 215, 0, 0.55), 0 4px 16px rgba(0,0,0,0.5);
+        }
+        #musicBtn.muted { filter: grayscale(1) opacity(0.55); }
+
+        @keyframes musicPulse {
+            0%,100% { box-shadow: 0 0 18px rgba(255,215,0,0.3), 0 4px 16px rgba(0,0,0,0.5); }
+            50% { box-shadow: 0 0 32px rgba(255,215,0,0.65), 0 4px 16px rgba(0,0,0,0.5); }
+        }
+        #musicBtn:not(.muted) { animation: musicPulse 2.5s ease-in-out infinite; }
+
         @media (max-width: 600px) {
             .photos-grid { grid-template-columns: 1fr; gap: 24px; }
             .msg-box { padding: 38px 26px; }
             .msg-corner { font-size: 24px; }
+            #musicBtn { bottom: 16px; right: 16px; width: 46px; height: 46px; font-size: 20px; }
         }
     </style>
 </head>
@@ -483,6 +515,14 @@
     <div class="bg"></div>
     <canvas id="canvas"></canvas>
     <div id="cursor">✨</div>
+
+    <!-- Audio -->
+    <audio id="bgMusic" loop>
+        <source src="Harold y Elena – Por siempre (Videoclip Oficial)(mp3j.cc).mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music toggle button -->
+    <button id="musicBtn" title="Música" onclick="toggleMusic()">🎵</button>
 
     <!-- ===== INTRO ===== -->
     <div id="intro" onclick="launch()">
@@ -808,11 +848,32 @@ const shootingStars = Array.from({length:5}, () => new ShootingStar());
 })();
 
 /* ===========================
+   MUSIC
+=========================== */
+const music   = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+music.volume  = 0.55;
+let musicMuted = false;
+
+function startMusic() {
+    music.play().catch(() => {});
+    musicBtn.style.display = 'flex';
+}
+
+function toggleMusic() {
+    musicMuted = !musicMuted;
+    music.muted = musicMuted;
+    musicBtn.textContent = musicMuted ? '🔇' : '🎵';
+    musicBtn.classList.toggle('muted', musicMuted);
+}
+
+/* ===========================
    INTRO
 =========================== */
 function launch() {
     document.getElementById('intro').classList.add('hidden');
     document.getElementById('main').style.display = 'block';
+    startMusic();
     setTimeout(() => {
         buildGallery();
         setTimeout(revealPhotos, 300);
