@@ -28,7 +28,6 @@
             cursor: none;
         }
 
-        /* Custom cursor */
         #cursor {
             position: fixed;
             pointer-events: none;
@@ -39,7 +38,6 @@
             filter: drop-shadow(0 0 6px gold);
         }
 
-        /* Animated background */
         .bg {
             position: fixed;
             inset: 0;
@@ -113,7 +111,6 @@
             50% { opacity: 1; }
         }
 
-        /* Intro sparkle burst rings */
         .ring {
             position: absolute;
             border-radius: 50%;
@@ -128,10 +125,60 @@
             50% { transform: scale(1.06); opacity: 0.7; }
         }
 
-        /* ======== MAIN CONTENT ======== */
+        /* ======== MAIN ======== */
         #main { display: none; position: relative; z-index: 1; }
 
-        /* Header */
+        /* ======== HOY ES TU DÍA ======== */
+        #birthday-banner {
+            display: none;
+            padding: 30px 20px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .bday-box {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,105,180,0.1));
+            border: 1.5px solid rgba(255,215,0,0.5);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255,215,0,0.2), 0 0 120px rgba(255,105,180,0.1);
+        }
+        .bday-box::before {
+            content: '';
+            position: absolute;
+            top: -60%; left: -60%;
+            width: 220%; height: 220%;
+            background: conic-gradient(from 0deg, transparent 340deg, rgba(255,215,0,0.07) 360deg);
+            animation: msgRotate 10s linear infinite;
+        }
+        .bday-emoji { font-size: 58px; animation: heartBeat 1.4s ease-in-out infinite; position: relative; z-index: 1; }
+        .bday-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(24px, 6vw, 55px);
+            color: var(--gold);
+            text-shadow: 0 0 25px gold, 0 0 55px rgba(255,215,0,0.5);
+            margin: 14px 0 8px;
+            animation: titlePulse 2s ease-in-out infinite;
+            position: relative; z-index: 1;
+        }
+        .bday-sub {
+            font-size: clamp(17px, 3vw, 28px);
+            color: var(--pink-light);
+            text-shadow: 0 0 12px var(--pink);
+            position: relative; z-index: 1;
+        }
+        .bday-verse {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(12px, 2vw, 15px);
+            color: rgba(255,215,0,0.65);
+            margin-top: 14px;
+            position: relative; z-index: 1;
+        }
+
+        /* ======== HEADER ======== */
         .header {
             text-align: center;
             padding: 70px 20px 30px;
@@ -209,7 +256,43 @@
             line-height: 1.5;
         }
 
-        /* Castle SVG */
+        /* ======== AGE COUNTER ======== */
+        .age-section {
+            text-align: center;
+            padding: 20px 20px 10px;
+        }
+        .age-number {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(80px, 20vw, 170px);
+            background: linear-gradient(135deg, #ffe066, #ffd700, #ffa500, #ffd700, #fff0a0);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradShift 3s ease infinite;
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.4));
+            line-height: 1;
+            display: block;
+        }
+        .age-label {
+            font-size: clamp(17px, 3.2vw, 30px);
+            color: var(--pink-light);
+            text-shadow: 0 0 12px var(--pink);
+            margin-top: 2px;
+            display: block;
+        }
+        .age-verse {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(12px, 2vw, 15px);
+            color: rgba(255,215,0,0.6);
+            margin: 14px auto 0;
+            max-width: 480px;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        /* Castle */
         .castle-wrap {
             text-align: center;
             margin: 18px 0 10px;
@@ -224,11 +307,27 @@
             50% { filter: drop-shadow(0 0 22px rgba(255,215,0,0.6)) drop-shadow(0 0 40px rgba(255,105,180,0.2)); }
         }
 
+        /* ======== BIBLE VERSES ======== */
+        .bible-verse {
+            position: absolute;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(10px, 1.4vw, 13px);
+            color: rgba(255,215,0,0.2);
+            pointer-events: none;
+            line-height: 1.5;
+            max-width: 160px;
+            text-align: center;
+            z-index: 0;
+            user-select: none;
+        }
+
         /* ======== GALLERY ======== */
         .gallery {
             padding: 50px 20px 30px;
             max-width: 1150px;
             margin: 0 auto;
+            position: relative;
         }
 
         .section-title {
@@ -251,6 +350,8 @@
             opacity: 0;
             transform: translateY(60px) scale(0.93);
             transition: opacity 0.75s cubic-bezier(0.23,1,0.32,1), transform 0.75s cubic-bezier(0.23,1,0.32,1);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
         .photo-card.visible {
             opacity: 1;
@@ -261,10 +362,7 @@
             border-radius: 22px;
             padding: 7px;
             background: linear-gradient(135deg, #ffe566, #ffd700, #ffaa00, #ffd700, #fff0a0);
-            box-shadow:
-                0 0 22px rgba(255,215,0,0.45),
-                0 0 50px rgba(255,215,0,0.18),
-                0 8px 32px rgba(0,0,0,0.5);
+            box-shadow: 0 0 22px rgba(255,215,0,0.45), 0 0 50px rgba(255,215,0,0.18), 0 8px 32px rgba(0,0,0,0.5);
             animation: frameBreath 3.5s ease-in-out infinite;
             position: relative;
             overflow: hidden;
@@ -273,19 +371,11 @@
             content: '';
             position: absolute;
             inset: -50%;
-            background: conic-gradient(
-                from 0deg,
-                transparent 0deg,
-                rgba(255,255,255,0.18) 40deg,
-                transparent 80deg
-            );
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.18) 40deg, transparent 80deg);
             animation: shimmerRot 4s linear infinite;
             pointer-events: none;
         }
-        @keyframes shimmerRot {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        @keyframes shimmerRot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes frameBreath {
             0%,100% { box-shadow: 0 0 22px rgba(255,215,0,0.45), 0 0 50px rgba(255,215,0,0.18), 0 8px 32px rgba(0,0,0,0.5); }
             50% { box-shadow: 0 0 38px rgba(255,215,0,0.75), 0 0 80px rgba(255,215,0,0.35), 0 0 120px rgba(255,105,180,0.2), 0 8px 32px rgba(0,0,0,0.5); }
@@ -301,7 +391,6 @@
             position: relative;
             z-index: 1;
         }
-        .photo-card:hover .photo-frame img { transform: scale(1.06); }
 
         .photo-glow-overlay {
             position: absolute;
@@ -341,7 +430,6 @@
             50% { transform: translateY(-8px) rotate(6deg); }
         }
 
-        /* Hover sparkle burst */
         .sparkle-burst {
             position: absolute;
             inset: 0;
@@ -357,6 +445,88 @@
             text-shadow: 0 0 12px gold;
         }
         .photo-card:hover .sparkle-burst { opacity: 1; }
+
+        /* ======== REASONS ======== */
+        .reasons-section {
+            padding: 50px 20px 30px;
+            max-width: 1150px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 26px;
+            margin-top: 42px;
+        }
+        .reason-card {
+            height: 210px;
+            perspective: 900px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reason-card.visible { opacity: 1; transform: translateY(0); }
+        .reason-inner {
+            width: 100%; height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.23,1,0.32,1);
+        }
+        .reason-card.flipped .reason-inner { transform: rotateY(180deg); }
+        .reason-front, .reason-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 18px;
+            text-align: center;
+        }
+        .reason-front {
+            background: linear-gradient(135deg, rgba(42,8,69,0.88), rgba(13,0,33,0.92));
+            border: 1px solid rgba(255,215,0,0.38);
+            box-shadow: 0 0 22px rgba(255,215,0,0.15), 0 8px 24px rgba(0,0,0,0.4);
+        }
+        .reason-back {
+            background: linear-gradient(135deg, rgba(255,105,180,0.16), rgba(42,8,69,0.96));
+            border: 1px solid rgba(255,105,180,0.42);
+            box-shadow: 0 0 22px rgba(255,105,180,0.2), 0 8px 24px rgba(0,0,0,0.4);
+            transform: rotateY(180deg);
+        }
+        .reason-icon { font-size: 40px; margin-bottom: 10px; filter: drop-shadow(0 0 8px gold); }
+        .reason-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(11px, 1.8vw, 14px);
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        .reason-tap {
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            margin-top: 8px;
+            animation: blink 2.2s ease-in-out infinite;
+        }
+        .reason-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(14px, 2.2vw, 17px);
+            color: var(--white-glow);
+            line-height: 1.6;
+            text-shadow: 0 0 8px rgba(255,255,255,0.2);
+        }
+        .reason-verse {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(10px, 1.6vw, 12px);
+            color: rgba(255,215,0,0.6);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
 
         /* ======== MESSAGE ======== */
         .message-section {
@@ -377,10 +547,8 @@
         .msg-box::before {
             content: '';
             position: absolute;
-            top: -60%;
-            left: -60%;
-            width: 220%;
-            height: 220%;
+            top: -60%; left: -60%;
+            width: 220%; height: 220%;
             background: conic-gradient(from 0deg, transparent 340deg, rgba(255,215,0,0.05) 360deg);
             animation: msgRotate 12s linear infinite;
         }
@@ -403,8 +571,7 @@
             margin-bottom: 18px;
             filter: drop-shadow(0 0 15px rgba(255,105,180,0.7));
             animation: heartBeat 1.8s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         .msg-title {
@@ -414,8 +581,7 @@
             text-align: center;
             margin-bottom: 28px;
             text-shadow: 0 0 15px rgba(255,215,0,0.5);
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         .msg-text {
@@ -426,8 +592,7 @@
             text-shadow: 0 0 8px rgba(255,255,255,0.2);
             white-space: pre-line;
             text-align: center;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         .msg-sign {
@@ -437,14 +602,13 @@
             text-align: center;
             margin-top: 30px;
             text-shadow: 0 0 12px rgba(255,105,180,0.5);
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         /* ======== FOOTER ======== */
         .footer {
             text-align: center;
-            padding: 30px 20px 80px;
+            padding: 30px 20px 100px;
         }
         .footer p {
             font-size: clamp(15px, 2.5vw, 22px);
@@ -456,6 +620,17 @@
             margin-top: 14px;
             animation: heartBeat 1.8s ease-in-out infinite;
             filter: drop-shadow(0 0 8px rgba(255,105,180,0.5));
+        }
+        .footer-verse {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(12px, 2vw, 15px);
+            color: rgba(255,215,0,0.5);
+            margin-top: 18px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
         }
 
         /* Floating emojis */
@@ -491,12 +666,8 @@
             box-shadow: 0 0 18px rgba(255, 215, 0, 0.3), 0 4px 16px rgba(0,0,0,0.5);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        #musicBtn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 28px rgba(255, 215, 0, 0.55), 0 4px 16px rgba(0,0,0,0.5);
-        }
+        #musicBtn:hover { transform: scale(1.15); box-shadow: 0 0 28px rgba(255,215,0,0.55), 0 4px 16px rgba(0,0,0,0.5); }
         #musicBtn.muted { filter: grayscale(1) opacity(0.55); }
-
         @keyframes musicPulse {
             0%,100% { box-shadow: 0 0 18px rgba(255,215,0,0.3), 0 4px 16px rgba(0,0,0,0.5); }
             50% { box-shadow: 0 0 32px rgba(255,215,0,0.65), 0 4px 16px rgba(0,0,0,0.5); }
@@ -505,9 +676,14 @@
 
         @media (max-width: 600px) {
             .photos-grid { grid-template-columns: 1fr; gap: 24px; }
+            .reasons-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+            .reason-card { height: 180px; }
             .msg-box { padding: 38px 26px; }
             .msg-corner { font-size: 24px; }
             #musicBtn { bottom: 16px; right: 16px; width: 46px; height: 46px; font-size: 20px; }
+        }
+        @media (max-width: 380px) {
+            .reasons-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -516,15 +692,12 @@
     <canvas id="canvas"></canvas>
     <div id="cursor">✨</div>
 
-    <!-- Audio -->
     <audio id="bgMusic" loop>
         <source src="Harold y Elena – Por siempre (Videoclip Oficial)(mp3j.cc).mp3" type="audio/mpeg">
     </audio>
-
-    <!-- Music toggle button -->
     <button id="musicBtn" title="Música" onclick="toggleMusic()">🎵</button>
 
-    <!-- ===== INTRO ===== -->
+    <!-- INTRO -->
     <div id="intro" onclick="launch()">
         <div class="ring"></div>
         <div class="ring"></div>
@@ -535,8 +708,18 @@
         <div class="intro-tap">✦ Toca para descubrir tu regalo ✦</div>
     </div>
 
-    <!-- ===== MAIN ===== -->
+    <!-- MAIN -->
     <div id="main">
+
+        <!-- Banner cumpleaños (solo aparece ese día) -->
+        <div id="birthday-banner">
+            <div class="bday-box">
+                <div class="bday-emoji">🎂🎉🎊</div>
+                <p class="bday-title">¡Hoy es tu día, Princesa!</p>
+                <p class="bday-sub">El cielo entero celebra contigo hoy 💫</p>
+                <p class="bday-verse">"Este es el día que hizo Jehová; nos gozaremos y alegraremos en él." — Salmos 118:24</p>
+            </div>
+        </div>
 
         <!-- Header -->
         <div class="header">
@@ -555,7 +738,6 @@
             <div class="castle-wrap">
                 <svg class="castle-svg" viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg"
                      fill="rgba(255,215,0,0.13)" stroke="rgba(255,215,0,0.45)" stroke-width="1.2">
-                    <!-- Left tower -->
                     <rect x="55" y="85" width="45" height="105"/>
                     <polygon points="55,85 77,52 100,85"/>
                     <line x1="77" y1="52" x2="77" y2="35" stroke="rgba(255,215,0,0.7)" stroke-width="1.5"/>
@@ -565,7 +747,6 @@
                     <rect x="69" y="76" width="10" height="13"/>
                     <rect x="85" y="76" width="10" height="13"/>
                     <rect x="101" y="76" width="10" height="13"/>
-                    <!-- Right tower -->
                     <rect x="320" y="85" width="45" height="105"/>
                     <polygon points="320,85 342,52 365,85"/>
                     <line x1="342" y1="52" x2="342" y2="35" stroke="rgba(255,215,0,0.7)" stroke-width="1.5"/>
@@ -575,7 +756,6 @@
                     <rect x="334" y="76" width="10" height="13"/>
                     <rect x="350" y="76" width="10" height="13"/>
                     <rect x="366" y="76" width="10" height="13"/>
-                    <!-- Center tall tower -->
                     <rect x="163" y="42" width="94" height="148"/>
                     <polygon points="163,42 210,4 257,42"/>
                     <line x1="210" y1="4" x2="210" y2="-14" stroke="rgba(255,215,0,0.7)" stroke-width="2"/>
@@ -589,7 +769,6 @@
                     <rect x="201" y="32" width="13" height="15"/>
                     <rect x="221" y="32" width="13" height="15"/>
                     <rect x="241" y="32" width="13" height="15"/>
-                    <!-- Side walls -->
                     <rect x="100" y="116" width="63" height="74"/>
                     <rect x="257" y="116" width="63" height="74"/>
                     <rect x="98" y="107" width="11" height="13"/>
@@ -600,11 +779,8 @@
                     <rect x="275" y="107" width="11" height="13"/>
                     <rect x="292" y="107" width="11" height="13"/>
                     <rect x="309" y="107" width="11" height="13"/>
-                    <!-- Gate arch -->
                     <path d="M186,190 L186,155 Q210,138 234,155 L234,190 Z" fill="rgba(10,0,28,0.85)" stroke="rgba(255,215,0,0.5)"/>
-                    <!-- Ground -->
                     <rect x="0" y="190" width="420" height="20" fill="rgba(255,215,0,0.07)" stroke="none"/>
-                    <!-- Ambient stars -->
                     <text x="20" y="55" font-size="16" fill="rgba(255,215,0,0.55)" stroke="none">✦</text>
                     <text x="380" y="75" font-size="12" fill="rgba(255,215,0,0.55)" stroke="none">✦</text>
                     <text x="8" y="140" font-size="10" fill="rgba(255,179,217,0.55)" stroke="none">✧</text>
@@ -613,10 +789,26 @@
             </div>
         </div>
 
+        <!-- Contador de edad -->
+        <div class="age-section">
+            <span class="age-number" id="ageNum">0</span>
+            <span class="age-label">años de ser la mujer más maravillosa del mundo 💖</span>
+            <p class="age-verse">"Antes de formarte en el vientre, ya te conocía; antes de que nacieras, te aparté." — Jeremías 1:5</p>
+        </div>
+
         <!-- Gallery -->
         <div class="gallery">
             <h2 class="section-title">✨ Nuestros Momentos Mágicos ✨</h2>
             <div class="photos-grid" id="grid"></div>
+        </div>
+
+        <!-- Razones por las que te amo -->
+        <div class="reasons-section">
+            <h2 class="section-title">💖 Razones por las que te amo 💖</h2>
+            <p style="text-align:center; color:rgba(255,179,217,0.6); font-size:clamp(14px,2vw,18px); margin-top:-20px;">
+                Toca cada tarjeta para descubrir ✨
+            </p>
+            <div class="reasons-grid" id="reasonsGrid"></div>
         </div>
 
         <!-- Message -->
@@ -637,13 +829,17 @@
         <div class="footer">
             <p>✨ Que todos tus sueños de princesa se hagan realidad ✨</p>
             <div class="footer-hearts">💖 💗 💖 💗 💖</div>
+            <p class="footer-verse">"Yo te amé con amor eterno; por eso te sigo con fidelidad." — Jeremías 31:3</p>
         </div>
     </div>
 
 <script>
-/* ===========================
-   CONFIGURATION
-=========================== */
+/* ===== CONFIG ===== */
+// Cambia el mes (1-12) y día del cumpleaños de tu princesa
+const BDAY_MONTH = 5;   // mayo
+const BDAY_DAY   = 12;  // día 12
+const AGE        = 24;
+
 const PHOTOS = [
     { src: 'Dios es nuestra meta.jpg.jpeg', badge: '💖✨' },
     { src: 'imagen 11.jpeg',                badge: '👑💫' },
@@ -671,13 +867,76 @@ porque tú mereces absolutamente todo lo más bonito del mundo. 🌟
 
 ¡Feliz Cumpleaños, mi amor! 💖`;
 
-/* ===========================
-   CUSTOM CURSOR
-=========================== */
+const REASONS = [
+    {
+        icon: '🙏',
+        title: 'Tu Fe en Dios',
+        text: 'Ver cómo buscas a Dios con todo tu corazón me inspira y me enamora cada día más.',
+        verse: '"Bienaventurada la que creyó." — Lucas 1:45'
+    },
+    {
+        icon: '💝',
+        title: 'Tu Bondad',
+        text: 'Tu corazón es tan grande y tan bueno que alcanza para todos los que te rodean.',
+        verse: '"La mujer bondadosa se gana el respeto." — Prov 11:16'
+    },
+    {
+        icon: '😊',
+        title: 'Tu Sonrisa',
+        text: 'Cuando sonríes el mundo entero se ilumina. Es mi lugar favorito en el universo.',
+        verse: '"Alegre corazón hermosea el rostro." — Prov 15:13'
+    },
+    {
+        icon: '💪',
+        title: 'Tu Fortaleza',
+        text: 'Eres más fuerte de lo que crees. Enfrentas todo con una valentía que me asombra.',
+        verse: '"Se reviste de fuerza y dignidad." — Prov 31:25'
+    },
+    {
+        icon: '🌸',
+        title: 'Tu Ternura',
+        text: 'Tu dulzura y tu ternura me derriten. Tienes el don de hacer sentir amado a todos.',
+        verse: '"El amor es benigno y sufrido." — 1 Cor 13:4'
+    },
+    {
+        icon: '🌟',
+        title: 'Tu Sabiduría',
+        text: 'Hablas con sabiduría, con enseñanza amorosa en tu lengua. Eso es un regalo de Dios.',
+        verse: '"Habla con sabiduría." — Prov 31:26'
+    },
+    {
+        icon: '👑',
+        title: 'Tu Virtud',
+        text: 'Eres la mujer virtuosa que la Biblia describe: tu precio está muy por encima de las joyas.',
+        verse: '"Mujer virtuosa ¿quién la hallará?" — Prov 31:10'
+    },
+    {
+        icon: '💖',
+        title: 'Tu Amor',
+        text: 'Sabes amar de una manera tan bonita que me transforma. Gracias por amarme, princesa.',
+        verse: '"El amor nunca deja de ser." — 1 Cor 13:8'
+    },
+];
+
+const BIBLE_VERSES = [
+    { text: '"La mujer que teme a Jehová, ésa será alabada."', ref: '— Prov 31:30' },
+    { text: '"He aquí que eres hermosa, amada mía."', ref: '— Cantares 1:15' },
+    { text: '"Confía en Jehová con todo tu corazón."', ref: '— Prov 3:5' },
+    { text: '"Todo lo puedo en Cristo que me fortalece."', ref: '— Fil 4:13' },
+    { text: '"El Señor tu Dios está en medio de ti."', ref: '— Sof 3:17' },
+    { text: '"Porque yo sé los planes que tengo para ti."', ref: '— Jer 29:11' },
+    { text: '"El amor cubre multitud de pecados."', ref: '— 1 Ped 4:8' },
+    { text: '"Dios es amor."', ref: '— 1 Juan 4:8' },
+    { text: '"Su misericordia es para siempre."', ref: '— Sal 136:1' },
+    { text: '"Eres toda hermosa, amada mía."', ref: '— Cantares 4:7' },
+    { text: '"El amor es sufrido, es benigno."', ref: '— 1 Cor 13:4' },
+    { text: '"Busca primero el reino de Dios."', ref: '— Mat 6:33' },
+];
+
+/* ===== CURSOR ===== */
 const cursorEl = document.getElementById('cursor');
 const cursorIcons = ['✨','⭐','💫','👑','✦','🌟','💖'];
 let ci = 0;
-
 document.addEventListener('mousemove', e => {
     cursorEl.style.left = e.clientX + 'px';
     cursorEl.style.top  = e.clientY + 'px';
@@ -685,9 +944,7 @@ document.addEventListener('mousemove', e => {
 });
 setInterval(() => { ci = (ci+1) % cursorIcons.length; cursorEl.textContent = cursorIcons[ci]; }, 550);
 
-/* ===========================
-   SPARKLE TRAIL
-=========================== */
+/* ===== SPARKLE TRAIL ===== */
 let sparkleStyleAdded = false;
 function maybeSparkle(x, y) {
     if (Math.random() > 0.32) return;
@@ -706,21 +963,16 @@ function maybeSparkle(x, y) {
     const dy = -30 - Math.random()*60;
     const dr = (Math.random()-0.5)*360 + 'deg';
     el.textContent = icons[Math.floor(Math.random()*icons.length)];
-    el.style.cssText = `
-        position:fixed; left:${x}px; top:${y}px; z-index:99998;
-        pointer-events:none; font-size:${10+Math.random()*18}px;
-        --dx:${dx}px; --dy:${dy}px; --dr:${dr};
-        animation: sparkleGo 0.9s ease-out forwards;`;
+    el.style.cssText = `position:fixed;left:${x}px;top:${y}px;z-index:99998;pointer-events:none;
+        font-size:${10+Math.random()*18}px;--dx:${dx}px;--dy:${dy}px;--dr:${dr};
+        animation:sparkleGo 0.9s ease-out forwards;`;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 950);
 }
 
-/* ===========================
-   CANVAS PARTICLES
-=========================== */
+/* ===== CANVAS ===== */
 const canvas = document.getElementById('canvas');
 const ctx    = canvas.getContext('2d');
-
 function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
 resize();
 window.addEventListener('resize', resize);
@@ -728,55 +980,40 @@ window.addEventListener('resize', resize);
 const COLORS = ['#FFD700','#FFF0A0','#ff69b4','#ffb3d9','#ffffff','#c084fc','#a78bfa'];
 
 class Particle {
-    constructor(spread) {
-        this.init(spread);
-    }
+    constructor(spread) { this.init(spread); }
     init(spread) {
-        this.x  = Math.random() * canvas.width;
-        this.y  = spread ? Math.random() * canvas.height : canvas.height + 10;
-        this.vy = -(Math.random()*0.9 + 0.25);
+        this.x = Math.random()*canvas.width;
+        this.y = spread ? Math.random()*canvas.height : canvas.height+10;
+        this.vy = -(Math.random()*0.9+0.25);
         this.vx = (Math.random()-0.5)*0.45;
-        this.r  = Math.random()*2.5 + 0.8;
+        this.r  = Math.random()*2.5+0.8;
         this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
-        this.rot   = Math.random()*Math.PI*2;
-        this.rspd  = (Math.random()-0.5)*0.04;
-        this.twk   = Math.random()*Math.PI*2;
-        this.type  = Math.floor(Math.random()*4);
+        this.rot = Math.random()*Math.PI*2;
+        this.rspd = (Math.random()-0.5)*0.04;
+        this.twk = Math.random()*Math.PI*2;
+        this.type = Math.floor(Math.random()*4);
     }
     update() {
-        this.y   += this.vy;
-        this.x   += this.vx;
-        this.rot += this.rspd;
-        this.twk += 0.045;
+        this.y += this.vy; this.x += this.vx;
+        this.rot += this.rspd; this.twk += 0.045;
         this.alpha = 0.28 + Math.abs(Math.sin(this.twk))*0.55;
         if (this.y < -15) this.init(false);
     }
     draw() {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.fillStyle   = this.color;
-        ctx.strokeStyle = this.color;
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.rot);
-        if (this.type === 0) {
-            star5(this.r*2.2, this.r);
-            ctx.fill();
-        } else if (this.type === 1) {
-            ctx.beginPath(); ctx.arc(0,0,this.r,0,Math.PI*2); ctx.fill();
-        } else if (this.type === 2) {
-            const r = this.r*1.6;
-            ctx.beginPath();
+        ctx.save(); ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color; ctx.strokeStyle = this.color;
+        ctx.translate(this.x, this.y); ctx.rotate(this.rot);
+        if (this.type===0) { star5(this.r*2.2,this.r); ctx.fill(); }
+        else if (this.type===1) { ctx.beginPath(); ctx.arc(0,0,this.r,0,Math.PI*2); ctx.fill(); }
+        else if (this.type===2) {
+            const r=this.r*1.6; ctx.beginPath();
             ctx.moveTo(0,-r); ctx.lineTo(r,0); ctx.lineTo(0,r); ctx.lineTo(-r,0);
             ctx.closePath(); ctx.fill();
         } else {
-            ctx.lineWidth = this.r*0.5;
-            const r = this.r*2;
-            ctx.beginPath();
-            ctx.moveTo(-r,0); ctx.lineTo(r,0);
-            ctx.moveTo(0,-r); ctx.lineTo(0,r);
+            ctx.lineWidth=this.r*0.5; const r=this.r*2; ctx.beginPath();
+            ctx.moveTo(-r,0); ctx.lineTo(r,0); ctx.moveTo(0,-r); ctx.lineTo(0,r);
             ctx.moveTo(-r*.7,-r*.7); ctx.lineTo(r*.7,r*.7);
-            ctx.moveTo(r*.7,-r*.7); ctx.lineTo(-r*.7,r*.7);
-            ctx.stroke();
+            ctx.moveTo(r*.7,-r*.7); ctx.lineTo(-r*.7,r*.7); ctx.stroke();
         }
         ctx.restore();
     }
@@ -787,8 +1024,8 @@ function star5(outer, inner) {
     for (let i=0;i<10;i++) {
         const a = (i*Math.PI)/5 - Math.PI/2;
         const r = i%2===0 ? outer : inner;
-        i===0 ? ctx.moveTo(Math.cos(a)*r,Math.sin(a)*r)
-              : ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);
+        i===0 ? ctx.moveTo(Math.cos(a)*r, Math.sin(a)*r)
+              : ctx.lineTo(Math.cos(a)*r, Math.sin(a)*r);
     }
     ctx.closePath();
 }
@@ -796,43 +1033,30 @@ function star5(outer, inner) {
 class ShootingStar {
     constructor() { this.reset(); }
     reset() {
-        this.x     = Math.random()*canvas.width;
-        this.y     = Math.random()*canvas.height*0.45;
-        this.angle = Math.PI/4 + (Math.random()-0.5)*0.35;
-        this.speed = Math.random()*7+4;
-        this.len   = Math.random()*90+45;
-        this.alpha = 0;
-        this.maxA  = Math.random()*0.75+0.2;
-        this.phase = 'in';
-        this.wait  = Math.random()*350;
+        this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height*0.45;
+        this.angle=Math.PI/4+(Math.random()-0.5)*0.35;
+        this.speed=Math.random()*7+4; this.len=Math.random()*90+45;
+        this.alpha=0; this.maxA=Math.random()*0.75+0.2;
+        this.phase='in'; this.wait=Math.random()*350;
     }
     update() {
         if (this.wait>0) { this.wait--; return; }
-        if (this.phase==='in') {
-            this.alpha += 0.06;
-            if (this.alpha>=this.maxA) this.phase='go';
-        } else {
-            this.x += Math.cos(this.angle)*this.speed;
-            this.y += Math.sin(this.angle)*this.speed;
-            this.alpha -= 0.012;
+        if (this.phase==='in') { this.alpha+=0.06; if (this.alpha>=this.maxA) this.phase='go'; }
+        else {
+            this.x+=Math.cos(this.angle)*this.speed; this.y+=Math.sin(this.angle)*this.speed;
+            this.alpha-=0.012;
             if (this.alpha<=0||this.x>canvas.width+120||this.y>canvas.height+120) this.reset();
         }
     }
     draw() {
         if (this.wait>0||this.alpha<=0) return;
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        const tx = this.x - Math.cos(this.angle)*this.len;
-        const ty = this.y - Math.sin(this.angle)*this.len;
-        const g  = ctx.createLinearGradient(tx,ty,this.x,this.y);
-        g.addColorStop(0,'transparent');
-        g.addColorStop(0.5,'rgba(255,240,160,0.45)');
-        g.addColorStop(1,'#ffffff');
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 2;
+        ctx.save(); ctx.globalAlpha=this.alpha;
+        const tx=this.x-Math.cos(this.angle)*this.len, ty=this.y-Math.sin(this.angle)*this.len;
+        const g=ctx.createLinearGradient(tx,ty,this.x,this.y);
+        g.addColorStop(0,'transparent'); g.addColorStop(0.5,'rgba(255,240,160,0.45)'); g.addColorStop(1,'#ffffff');
+        ctx.strokeStyle=g; ctx.lineWidth=2;
         ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(this.x,this.y); ctx.stroke();
-        ctx.fillStyle='#fff';
-        ctx.beginPath(); ctx.arc(this.x,this.y,2.2,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(this.x,this.y,2.2,0,Math.PI*2); ctx.fill();
         ctx.restore();
     }
 }
@@ -847,19 +1071,16 @@ const shootingStars = Array.from({length:5}, () => new ShootingStar());
     requestAnimationFrame(loop);
 })();
 
-/* ===========================
-   MUSIC
-=========================== */
-const music   = document.getElementById('bgMusic');
+/* ===== MUSIC ===== */
+const music    = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
-music.volume  = 0.55;
+music.volume   = 0.55;
 let musicMuted = false;
 
 function startMusic() {
     music.play().catch(() => {});
     musicBtn.style.display = 'flex';
 }
-
 function toggleMusic() {
     musicMuted = !musicMuted;
     music.muted = musicMuted;
@@ -867,23 +1088,59 @@ function toggleMusic() {
     musicBtn.classList.toggle('muted', musicMuted);
 }
 
-/* ===========================
-   INTRO
-=========================== */
+/* ===== BIRTHDAY CHECK ===== */
+function checkBirthday() {
+    const now = new Date();
+    if (now.getMonth()+1 === BDAY_MONTH && now.getDate() === BDAY_DAY) {
+        document.getElementById('birthday-banner').style.display = 'block';
+    }
+}
+
+/* ===== AGE COUNTER ANIMATION ===== */
+function animateAge() {
+    const el = document.getElementById('ageNum');
+    let current = 0;
+    const step = () => {
+        current++;
+        el.textContent = current;
+        if (current < AGE) setTimeout(step, 60);
+    };
+    setTimeout(step, 400);
+}
+
+/* ===== BIBLE VERSES SCATTER ===== */
+function scatterVerses() {
+    const main = document.getElementById('main');
+    const mainH = main.scrollHeight;
+    BIBLE_VERSES.forEach((v, i) => {
+        const el = document.createElement('div');
+        el.className = 'bible-verse';
+        el.innerHTML = `${v.text}<br><span style="font-size:0.85em;color:rgba(255,179,217,0.3)">${v.ref}</span>`;
+        const topPct  = 4 + (i / BIBLE_VERSES.length) * 88;
+        const leftPct = Math.random() > 0.5 ? (2 + Math.random()*12) : (82 + Math.random()*12);
+        el.style.cssText = `top:${topPct}%; left:${leftPct}%;`;
+        main.appendChild(el);
+    });
+}
+
+/* ===== INTRO ===== */
 function launch() {
     document.getElementById('intro').classList.add('hidden');
     document.getElementById('main').style.display = 'block';
     startMusic();
+    checkBirthday();
     setTimeout(() => {
+        scatterVerses();
         buildGallery();
+        buildReasons();
+        animateAge();
         setTimeout(revealPhotos, 300);
+        setTimeout(revealReasons, 600);
         setTimeout(typeMessage, 1200);
     }, 1400);
 }
 
-/* ===========================
-   GALLERY
-=========================== */
+/* ===== GALLERY ===== */
 function buildGallery() {
     const grid = document.getElementById('grid');
     PHOTOS.forEach((p, i) => {
@@ -899,6 +1156,7 @@ function buildGallery() {
             </div>
             <div class="sparkle-burst">✨✨✨</div>`;
         grid.appendChild(card);
+        initTilt(card);
     });
 }
 
@@ -908,9 +1166,69 @@ function revealPhotos() {
     });
 }
 
-/* ===========================
-   TYPEWRITER MESSAGE
-=========================== */
+/* ===== 3D TILT ===== */
+function initTilt(card) {
+    const MAX = 18;
+    function applyTilt(rx, ry) {
+        card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.04,1.04,1.04)`;
+        const img = card.querySelector('img');
+        if (img) img.style.transform = `scale(1.06) translateX(${ry*0.5}px) translateY(${-rx*0.5}px)`;
+    }
+    function resetTilt() {
+        card.style.transition = 'transform 0.55s ease, opacity 0.75s cubic-bezier(0.23,1,0.32,1)';
+        card.style.transform = '';
+        const img = card.querySelector('img');
+        if (img) { img.style.transition = 'transform 0.55s ease'; img.style.transform = ''; }
+    }
+    card.addEventListener('mousemove', e => {
+        card.style.transition = 'transform 0.08s ease';
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        applyTilt(-y*MAX, x*MAX);
+    });
+    card.addEventListener('mouseleave', resetTilt);
+    card.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        const r = card.getBoundingClientRect();
+        const x = (t.clientX - r.left) / r.width  - 0.5;
+        const y = (t.clientY - r.top)  / r.height - 0.5;
+        applyTilt(-y*MAX, x*MAX);
+    }, {passive:true});
+    card.addEventListener('touchend', resetTilt);
+}
+
+/* ===== REASONS ===== */
+function buildReasons() {
+    const grid = document.getElementById('reasonsGrid');
+    REASONS.forEach((r, i) => {
+        const card = document.createElement('div');
+        card.className = 'reason-card';
+        card.innerHTML = `
+            <div class="reason-inner">
+                <div class="reason-front">
+                    <div class="reason-icon">${r.icon}</div>
+                    <div class="reason-title">${r.title}</div>
+                    <div class="reason-tap">✦ toca para ver ✦</div>
+                </div>
+                <div class="reason-back">
+                    <div class="reason-text">${r.text}</div>
+                    <div class="reason-verse">${r.verse}</div>
+                </div>
+            </div>`;
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+        card.addEventListener('touchstart', () => card.classList.toggle('flipped'), {passive:true});
+        grid.appendChild(card);
+    });
+}
+
+function revealReasons() {
+    document.querySelectorAll('.reason-card').forEach((c,i) => {
+        setTimeout(() => c.classList.add('visible'), i*130);
+    });
+}
+
+/* ===== TYPEWRITER ===== */
 function typeMessage() {
     const el = document.getElementById('msgText');
     let i = 0;
@@ -923,20 +1241,14 @@ function typeMessage() {
     })();
 }
 
-/* ===========================
-   FLOATING EMOJIS
-=========================== */
+/* ===== FLOATING EMOJIS ===== */
 const floatIcons = ['✨','💖','⭐','👑','💫','🌟','💝','✦','🦋','🌸'];
 setInterval(() => {
     const el = document.createElement('div');
     el.className = 'float-el';
     el.textContent = floatIcons[Math.floor(Math.random()*floatIcons.length)];
-    el.style.cssText = `
-        left:${Math.random()*100}vw;
-        font-size:${16+Math.random()*18}px;
-        opacity:0;
-        animation-duration:${9+Math.random()*12}s;
-        animation-delay:0s;`;
+    el.style.cssText = `left:${Math.random()*100}vw;font-size:${16+Math.random()*18}px;opacity:0;
+        animation-duration:${9+Math.random()*12}s;animation-delay:0s;`;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 22000);
 }, 700);
