@@ -674,6 +674,59 @@
         }
         #musicBtn:not(.muted) { animation: musicPulse 2.5s ease-in-out infinite; }
 
+        /* ======== COUNTDOWN ======== */
+        .countdown-section {
+            padding: 20px 20px 60px;
+            display: flex;
+            justify-content: center;
+        }
+        .countdown-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .cd-units {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cd-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 60px;
+        }
+        .cd-num {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(22px, 5vw, 38px);
+            color: rgba(255,215,0,0.35);
+            text-shadow: 0 0 12px rgba(255,215,0,0.15);
+            line-height: 1;
+            transition: color 0.3s;
+        }
+        .cd-label {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(9px, 1.5vw, 11px);
+            color: rgba(255,255,255,0.18);
+            letter-spacing: 1px;
+        }
+        .cd-sep {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(20px, 4vw, 32px);
+            color: rgba(255,215,0,0.2);
+            margin-bottom: 14px;
+        }
+        .cd-continuara {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(13px, 2vw, 17px);
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 3px;
+        }
+
         @media (max-width: 600px) {
             .photos-grid { grid-template-columns: 1fr; gap: 24px; }
             .reasons-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -681,6 +734,7 @@
             .msg-box { padding: 38px 26px; }
             .msg-corner { font-size: 24px; }
             #musicBtn { bottom: 16px; right: 16px; width: 46px; height: 46px; font-size: 20px; }
+            .cd-unit { min-width: 46px; }
         }
         @media (max-width: 380px) {
             .reasons-grid { grid-template-columns: 1fr; }
@@ -830,6 +884,34 @@
             <p>✨ Que todos tus sueños de princesa se hagan realidad ✨</p>
             <div class="footer-hearts">💖 💗 💖 💗 💖</div>
             <p class="footer-verse">"Yo te amé con amor eterno; por eso te sigo con fidelidad." — Jeremías 31:3</p>
+        </div>
+
+        <!-- Contador secreto -->
+        <div class="countdown-section">
+            <div class="countdown-box">
+                <div class="cd-units">
+                    <div class="cd-unit">
+                        <span class="cd-num" id="cd-days">--</span>
+                        <span class="cd-label">días</span>
+                    </div>
+                    <div class="cd-sep">:</div>
+                    <div class="cd-unit">
+                        <span class="cd-num" id="cd-hours">--</span>
+                        <span class="cd-label">horas</span>
+                    </div>
+                    <div class="cd-sep">:</div>
+                    <div class="cd-unit">
+                        <span class="cd-num" id="cd-mins">--</span>
+                        <span class="cd-label">minutos</span>
+                    </div>
+                    <div class="cd-sep">:</div>
+                    <div class="cd-unit">
+                        <span class="cd-num" id="cd-secs">--</span>
+                        <span class="cd-label">segundos</span>
+                    </div>
+                </div>
+                <p class="cd-continuara">continuará...</p>
+            </div>
         </div>
     </div>
 
@@ -1129,6 +1211,7 @@ function launch() {
     document.getElementById('main').style.display = 'block';
     startMusic();
     checkBirthday();
+    startCountdown();
     setTimeout(() => {
         scatterVerses();
         buildGallery();
@@ -1252,6 +1335,25 @@ setInterval(() => {
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 22000);
 }, 700);
+
+/* ===== COUNTDOWN ===== */
+function startCountdown() {
+    const target = new Date('2028-02-19T00:00:00');
+    function tick() {
+        const diff = target - new Date();
+        if (diff <= 0) return;
+        const days  = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const mins  = Math.floor((diff % 3600000)  / 60000);
+        const secs  = Math.floor((diff % 60000)    / 1000);
+        document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+        document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+        document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+        document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+}
 
 /* Touch support */
 document.addEventListener('touchmove', e => {
