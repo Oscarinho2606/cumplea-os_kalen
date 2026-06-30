@@ -1374,7 +1374,7 @@
                 <div class="sel-hint">✦ toca para abrir ✦</div>
             </div>
             <div class="sel-card sel-card-anni" onclick="goTo('nosotros')">
-                <div class="sel-emoji">💑✨</div>
+                <div class="sel-emoji">👫✨</div>
                 <div class="sel-name">Nosotros</div>
                 <div class="sel-desc">4 Años de Amor</div>
                 <div class="sel-years-badge">✦ continuará... ✦</div>
@@ -1545,7 +1545,7 @@
         <!-- Banner aniversario -->
         <div id="anniversary-banner">
             <div class="anni-box">
-                <div class="anni-emoji">💑🎊💕</div>
+                <div class="anni-emoji">👫🎊💕</div>
                 <p class="anni-title">¡Hoy es nuestro día, Amor!</p>
                 <p class="anni-sub">Cuatro años de elegirte, amarte y crecer juntos 💖</p>
                 <p class="anni-verse">"Yo te amé con amor eterno; por eso te sigo con fidelidad." — Jeremías 31:3</p>
@@ -1559,7 +1559,7 @@
             <p class="main-name">Contigo</p>
             <div class="crown-div">
                 <div class="div-line"></div>
-                <span class="div-crown" style="filter:drop-shadow(0 0 12px rgba(255,105,180,0.8))">💑</span>
+                <span class="div-crown" style="filter:drop-shadow(0 0 12px rgba(255,105,180,0.8))">👫</span>
                 <div class="div-line" style="background:linear-gradient(to right,transparent,var(--pink),transparent)"></div>
             </div>
             <p class="subtitle">Cuatro años construyendo algo hermoso, con Dios y con amor 💖</p>
@@ -1596,7 +1596,7 @@
         <!-- Contador de años -->
         <div class="rel-section">
             <span class="rel-number" id="relNum">0</span>
-            <span class="rel-label-big">años contigo, mi amor 💑</span>
+            <span class="rel-label-big">años contigo, mi amor 👫</span>
             <span class="rel-detail" id="relDetail"></span>
             <p class="age-verse">"Yo te amé con amor eterno; por eso te sigo con fidelidad." — Jeremías 31:3</p>
         </div>
@@ -1625,7 +1625,7 @@
 
         <!-- Gallery -->
         <div class="gallery">
-            <h2 class="section-title">💑 Nuestra Historia en Imágenes 💑</h2>
+            <h2 class="section-title">👫 Nuestra Historia en Imágenes 👫</h2>
             <div class="photos-grid" id="nosotros-grid"></div>
         </div>
 
@@ -1645,7 +1645,7 @@
                 <span class="msg-corner tr">💕</span>
                 <span class="msg-corner bl">💕</span>
                 <span class="msg-corner br">💕</span>
-                <div class="msg-icon">💑</div>
+                <div class="msg-icon">👫</div>
                 <h3 class="msg-title">Para el Amor de Mi Vida</h3>
                 <p class="msg-text" id="nosotrosMsgText"></p>
                 <p class="msg-sign">Con todo mi corazón, tu Chiquito 💝</p>
@@ -1655,7 +1655,7 @@
         <!-- Footer -->
         <div class="footer">
             <p>✨ Cuatro años de amor, y los mejores están por venir ✨</p>
-            <div class="footer-hearts">💖 💑 💗 💑 💖</div>
+            <div class="footer-hearts">💖 👫 💗 👫 💖</div>
             <p class="footer-verse">"El amor nunca deja de ser." — 1 Corintios 13:8</p>
         </div>
 
@@ -1710,10 +1710,10 @@ const PHOTOS = [
 ];
 
 const NOSOTROS_PHOTOS = [
-    { src: 'Para 4 años.jpeg',                badge: '💑💎' },
+    { src: 'Para 4 años.jpeg',                badge: '👫💎' },
     { src: 'gatito.jpeg',                      badge: '🐱💖' },
     { src: 'Dios es nuestra meta.jpg.jpeg',    badge: '🙏💕' },
-    { src: 'imagen 11.jpeg',                   badge: '💫💑' },
+    { src: 'imagen 11.jpeg',                   badge: '💫👫' },
     { src: 'imagen 19.jpeg',                   badge: '✨💝' },
     { src: 'imagen 3.jpeg',                    badge: '🌹💖' },
     { src: 'imagen 6.jpeg',                    badge: '💕✨' },
@@ -1781,7 +1781,7 @@ const NOSOTROS_REASONS = [
     { icon: '💪', title: 'Que Nos Hicimos Más Fuertes', text: 'Las tormentas no nos rompieron. Nos unieron más y nos hicieron mejores.', verse: '"Dios es nuestro amparo y fortaleza." — Salmos 46:1' },
     { icon: '🌹', title: 'Que Te Elijo Cada Día', text: 'No fue una sola decisión. Cada mañana despierto y vuelvo a elegirte.', verse: '"Ponme como sello sobre tu corazón." — Cantares 8:6' },
     { icon: '🏠', title: 'Que Eres Mi Hogar', text: 'En cualquier lugar del mundo, contigo es donde quiero estar.', verse: '"El amor nunca deja de ser." — 1 Cor 13:8' },
-    { icon: '💑', title: 'Que Crecimos Juntos', text: 'Cuatro años de aprender, crecer y convertirnos en mejores personas el uno por el otro.', verse: '"El hierro se afila con hierro." — Proverbios 27:17' },
+    { icon: '👫', title: 'Que Crecimos Juntos', text: 'Cuatro años de aprender, crecer y convertirnos en mejores personas el uno por el otro.', verse: '"El hierro se afila con hierro." — Proverbios 27:17' },
     { icon: '🔮', title: 'Que Tenemos un Futuro', text: 'Lo mejor de nosotros todavía está por venir. Y no puedo esperar para vivirlo contigo.', verse: '"Yo sé los planes que tengo para vosotros." — Jeremías 29:11' },
 ];
 
@@ -2144,7 +2144,7 @@ function buildNosotrosGallery() {
         const card = document.createElement('div');
         card.className = 'photo-card';
         card.innerHTML = `
-            <div class="photo-crown" style="filter:drop-shadow(0 0 10px rgba(255,105,180,0.8))">💑</div>
+            <div class="photo-crown" style="filter:drop-shadow(0 0 10px rgba(255,105,180,0.8))">👫</div>
             <div class="photo-frame photo-frame-pink">
                 <img src="${p.src}" alt="Nosotros ${i+1}" loading="lazy"
                      onerror="this.closest('.photo-card').style.display='none'">
@@ -2327,7 +2327,7 @@ function typeNosotrosMessage() {
 }
 
 /* ===== FLOATING EMOJIS ===== */
-const floatIcons = ['✨','💖','⭐','👑','💫','🌟','💝','✦','🦋','🌸','💕','💑'];
+const floatIcons = ['✨','💖','⭐','👑','💫','🌟','💝','✦','🦋','🌸','💕','👫'];
 setInterval(() => {
     const el = document.createElement('div');
     el.className = 'float-el';
